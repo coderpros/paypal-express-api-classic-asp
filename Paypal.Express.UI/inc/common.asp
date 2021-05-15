@@ -267,26 +267,57 @@
     End Select
 
     Response.LCID = strLCID
+    
     End Sub
+    
+    Public Function GetSiteRootUrl()
+        Dim siteRootUrl, protocol, hostname, port
 
-    Function Base64Encode(sText)
+        If Request.ServerVariables("HTTPS") = "off" then
+            protocol = "http"
+        Else
+            protocol = "https"
+        End if
+
+        siteRootUrl = protocol & Server.HTMLEncode("://")
+
+        hostname = Request.ServerVariables("HTTP_HOST")
+        siteRootUrl = siteRootUrl & hostname        
+
+        port = Request.ServerVariables("SERVER_PORT")
+    
+        If port <> 80 and port <> 443 then
+            siteRootUrl = siteRootUrl & ":" & port
+        End If
+
+        getSiteRootUrl = siteRootUrl
+    End Function
+
+    Private Function Base64Encode(sText)
         Dim oXML, oNode
+        
         Set oXML = CreateObject("Msxml2.DOMDocument.3.0")
         Set oNode = oXML.CreateElement("base64")
+        
         oNode.dataType = "bin.base64"
         oNode.nodeTypedValue = Stream_StringToBinary(sText)
         Base64Encode = oNode.text
+        
         Set oNode = Nothing
         Set oXML = Nothing
     End Function
 
-    Function Base64Decode(ByVal sText)
+    Private Function Base64Decode(ByVal sText)
         Dim oXML, oNode
+        
         Set oXML = CreateObject("Msxml2.DOMDocument.3.0")
         Set oNode = oXML.CreateElement("base64")
+        
         oNode.dataType = "bin.base64"
         oNode.text = sText
+        
         Base64Decode = Stream_BinaryToString(oNode.nodeTypedValue)
+        
         Set oNode = Nothing
         Set oXML = Nothing
     End Function
@@ -306,9 +337,12 @@
       BinaryStream.Position = 0
       BinaryStream.Type = adTypeBinary
       BinaryStream.Position = 0
+      
       Stream_StringToBinary = BinaryStream.Read
+      
       Set BinaryStream = Nothing
     End Function
+
     Private Function Stream_BinaryToString(Binary)
       Const adTypeText = 2
       Const adTypeBinary = 1
@@ -323,7 +357,9 @@
       BinaryStream.Position = 0
       BinaryStream.Type = adTypeText
       BinaryStream.CharSet = "us-ascii"
+      
       Stream_BinaryToString = BinaryStream.ReadText
+      
       Set BinaryStream = Nothing
     End Function
 %>

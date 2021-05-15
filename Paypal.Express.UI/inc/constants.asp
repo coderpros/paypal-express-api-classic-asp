@@ -1,9 +1,11 @@
 ﻿<%
-    Const PayPalApiClientId = "AeX0M6nc67b-XbNootr5EvKfZcbyCBIoxbsJ4IMLyNDdIscOmfFMIQywKQ9ey1aNo0fdiVdMRmuez2cn"
-    Const PayPalApiSecret = "EKiJpIV8cZkyvcATidMCC4dHLTMSeFE2h3eg9_alhh8KPevdNhAxbGGmUkj6icQE_f7tI5JKLDmlg5Wz"
+    Const PayPalApiClientId = "ARU_T7OE10p7U0xTQbPvQGxGGi2684vk5cLVGXnLaTBdDIhZbZ4UXNLSfCUTMDJawRfQqbDeAtE429WC"
+    Const PayPalApiSecret = "EHr51LkGmwaNh1ag2iemBCY-wYabUfsxvWu0_fs_6gvaYwuFIUPuUgTkuByLsDI3Hq4rGPBZhSYNhSdY"
     ' The below is VERY important. It is a **base64 encoded** copy of PaypalApiClientId:PayPalApiSecret (the : is necessary).
-    Const PayPalEncodedAuth = "QWVYME02bmM2N2ItWGJOb290cjVFdktmWmNieUNCSW94YnNKNElNTHlORGRJc2NPbWZGTUlReXdLUTlleTFhTm8wZmRpVmRNUm11ZXoyY246RUtpSnBJVjhjWmt5dmNBVGlkTUNDNGRITFRNU2VGRTJoM2VnOV9hbGhoOEtQZXZkTmhBeGJHR21Va2o2aWNRRV9mN3RJNUpLTERtbGc1V3o="
+    Const PayPalEncodedAuth = "QVJVX1Q3T0UxMHA3VTB4VFFiUHZRR3hHR2kyNjg0dms1Y0xWR1huTGFUQmRESWhaYlo0VVhOTFNmQ1VUTURKYXdSZlFxYkRlQXRFNDI5V0M6RUhyNTFMa0dtd2FOaDFhZzJpZW1CQ1ktd1lhYlVmc3h2V3UwX2ZzXzZndmFZd3VGSVVQdVVnVGt1QnlMc0RJM0hxNHJHUEJaaFNZTmhTZFk="
     Const PaypalApiEndPoint = "https://api.sandbox.paypal.com/v1/"
-    
-    Const SslClientCertFriendlyName = "LOCAL_MACHINE\My\ServerXMLHTTP" 'The path and friendly name. Either obtained from your host or from Start => "Manage Computer Certificates" => Personal (could possibly be elsewhere)
+     'The path and friendly name of the CLIENT (or client/server) ssl cert. Either obtained from your host or from Start => "Manage Computer Certificates" => Personal (could possibly be elsewhere)
+    Const SslClientCertFriendlyName = "LOCAL_MACHINE\My\ServerXMLHTTP"
+    Const Locale = "en-us"
+    Const PaypalDebug = False
 %>
