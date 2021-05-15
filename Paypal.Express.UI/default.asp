@@ -4,6 +4,7 @@
 <!--#include file="inc/adovbs.inc"-->
 <!--#include file="inc/constants.asp"-->
 <!--#include file="inc/common.asp"-->
+<!--#include file="inc/PaypalObject.class.asp"-->
 <%
     SetLCID(Locale) 'Manually set the locale. *NB: Make sure the server supports it.
 %>

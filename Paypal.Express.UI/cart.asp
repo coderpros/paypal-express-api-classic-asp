@@ -180,7 +180,7 @@
                         quantities
                     });
 
-                    window.location.href = "<%= GetSiteRootUrl %> & /thanks.html"
+                    window.location.href = "<%= GetSiteRootUrl %>/thanks.html"
                 });
             },
             onCancel: function (data, actions) {
