@@ -5,7 +5,7 @@
 <!--#include file="inc/constants.asp"-->
 <!--#include file="inc/common.asp"-->
 <%
-    SetLCID("en-gb") 'Manually set the locale. *NB: Make sure the server supports it.
+    SetLCID(Locale) 'Manually set the locale. *NB: Make sure the server supports it.
 %>
 <!doctype html>
 

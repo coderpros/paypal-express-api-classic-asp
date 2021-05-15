@@ -96,6 +96,9 @@
     <Content Include="cart.asp" />
     <Content Include="Content\styles.css" />
     <Content Include="default.asp" />
+    <Content Include="cancel.asp" />
+    <Content Include="thanks.html" />
+    <Content Include="error.asp" />
     <Content Include="inc\adovbs.inc" />
     <Content Include="inc\common.asp" />
     <Content Include="inc\constants.asp" />
@@ -107,6 +110,7 @@
     <Content Include="Scripts\jquery-3.6.0.min.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
+    <Content Include="success.asp" />
     <Content Include="web.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>

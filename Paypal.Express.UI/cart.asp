@@ -8,12 +8,11 @@
     Dim idx, itemCount, total
     Dim aryItemName, aryItemPrice, aryItemQty
     Dim accessToken, clientToken
-    Dim debug: debug = False
 
     itemCount = 0
     total = 0
 
-    SetLCID("en-gb") 'Manually set the locale. *NB: If locale is not available on the server it WILL explode.
+    SetLCID(Locale) 'Manually set the locale. *NB: If locale is not available on the server it WILL explode.
 
     If InStr(1, Request.Form("ItemName"), ",") > 0 Then
         aryItemName = Split(Request.Form("ItemName"), ",")
@@ -29,7 +28,7 @@
         
     clientToken = paypal.GetClientToken(accessToken)("client_token")
 
-    If debug = True Then 
+    If PaypalDebug = True Then 
         Response.Write "Access Token: " & accessToken & "<br />"
         Response.Write "Client Token: " & clientToken & "<br />"
     End If
@@ -46,7 +45,7 @@
 
     <link rel="stylesheet" href="Content/styles.css?v=1.0">
 
-    <script src="https://www.paypal.com/sdk/js?debug=true&intent=capture&components=buttons&integration-date=2021-05-09&client-id=<%= PayPalApiClientId %>" data-client-token="<%= clientToken %>"></script>
+    <script src="https://www.paypal.com/sdk/js?debug=<%= LCase(PaypalDebug) %>&intent=capture&components=buttons&integration-date=2021-05-09&client-id=<%= PayPalApiClientId %>" data-client-token="<%= clientToken %>"></script>
     <!-- 
         Developer Notes: 
         1) Turn off debug before moving to prod.
@@ -145,15 +144,52 @@
                 });
             },
             onApprove: function (data, actions) {
+                // When a payment is successful:
+                    // Post data to an ASP to capture the information.
+                    // Send the user to a basic thank you page.
+                    // NB: This is done for better security. Obviously not infoulable, but better than how most people simply add vars to the querystring for the user to potentially modify them. 
                 return actions.order.capture().then(function (details) {
-                    window.location.href = '/success.html';
+                    let orderId, orderDate, intent, status;
+                    let payerId, payerEmail;
+                    let items = "", quantities = "";
+
+                    orderId = details.id;
+                    orderDate = details.create_time;
+                    intent = details.intent;
+                    status = details.status;
+
+                    payerId = details.payer.payer_id;
+                    payerEmail = details.payer.email_address;
+
+                    $(details.purchase_units[0].items).each(function(i, item) {
+                        items = items + item.name + ",";
+                        quantities = quantities + item.quantity + ","
+                    });
+
+                    items = items.substring(0, items.length - 1);
+                    quantities = quantities.substring(0, items.length - 1);
+
+                    $.post("<%= GetSiteRootUrl %>/success.asp", {
+                        orderId: orderId,
+                        orderDate: orderDate,
+                        intent: intent,
+                        status: status,
+                        payerId: payerId,
+                        payerEmail: payerEmail,
+                        items: items,
+                        quantities
+                    });
+
+                    window.location.href = "<%= GetSiteRootUrl %> & /thanks.html"
                 });
             },
             onCancel: function (data, actions) {
-                return actions.redirect();
+                console.log(data);
+                console.log(actions);
+                return actions.redirect("<%= GetSiteRootUrl %>/cancel.asp");
             },
             onError: function (err) {
-                // Show an error page here, when an error occurs
+                window.location.href = `/error.asp?e=${err.toString()}`;
             }
         }).render("#paypal-button-container");
     </script>
