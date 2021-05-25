@@ -30,5 +30,14 @@
 
 > Sample Paypal Express API example with JavaScript and Classic ASP
 
+## Notes
+1) If you receive this error: 
+msxml6.dll error '80072f0c'
+A certificate is required to complete client authentication
+/paypal.express.ui/inc/PaypalObject.class.asp, line 37
+
+Thiat is because you do not have a *client* cert. 
+The **second** answer on this StackOverflow question solves the problem: https://stackoverflow.com/questions/9212985/cant-use-https-with-serverxmlhttp-object
+
 ## Change Log
 * 2021/05/11: Project creation / initial checkin.
