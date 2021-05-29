@@ -106,10 +106,7 @@
     <Content Include="inc\PaypalObject.class.asp" />
     <Content Include="Scripts\scripts.js" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
-    <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
-    <Content Include="Scripts\jquery-3.6.0.slim.js" />
-    <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
     <Content Include="success.asp" />
     <Content Include="web.config" />
     <None Include="web.Debug.config">
@@ -161,8 +158,6 @@
     </None>
     <None Include="packages.config" />
     <Content Include="README.md" />
-    <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
-    <Content Include="Scripts\jquery-3.6.0.min.map" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

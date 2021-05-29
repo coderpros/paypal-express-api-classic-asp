@@ -24,7 +24,7 @@
           
         </section>
 
-    <script src="Scripts/jquery-3.6.0.js"></script>
+    <script src="Scripts/jquery-3.6.0.min.js"></script>
     <script src="Scripts/scripts.js"></script>
 </body>
 </html>
